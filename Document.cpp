@@ -16,10 +16,10 @@ Document::Document() {
     original_file = "";
     cleaned_file = "";
     index = new Dictionary();
+    search_frequency = 0.0;
 }
 
 void Document::load_file(string file, Dictionary* stop_words) {
-    cout << "Document::load_file" << endl;
     name = file.substr(0, (file.size() - 4));
     original_file = file;
     cleaned_file = "cleaned_corpus/" + name + "_cleaned.txt";
@@ -48,12 +48,9 @@ void Document::load_file(string file, Dictionary* stop_words) {
     else {
         cout << "Unable to open file";
     }
-    
-    cout << "Finished" << endl;
 }
 
 int Document::search(string word) {
-    cout << "Document::search : " << word << endl;
     return index->contains(word);
 }
 
@@ -63,4 +60,12 @@ int Document::get_total() {
 
 string Document::get_name() {
     return name;
+}
+
+void Document::set_frequency(double freq) {
+    search_frequency = freq;
+}
+
+double Document::get_frequency() {
+    return search_frequency;
 }
